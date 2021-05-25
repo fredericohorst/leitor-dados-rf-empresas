@@ -1,19 +1,22 @@
 
 import os 
+import utils
 
-import unzip
-
-# comecar com o downloader
-# bash command 
-# bash downloader.sh
-
-# descompactando os arquivos
+# buscando as variáveis
 path = os.getcwd()
 zipped = path + '/arquivos-zip/'
 print(zipped)
 unzipped = path + '/arquivos-unzip/'
-print(unzipped)
 
-unzip.descompactando(caminho_do_arquivo=zipped,tipo_arquivo='.zip',caminho_descompactado=unzipped)
+# arquivos contendo as urls de download
+lista_urls = ['outros.txt','empresas.txt', 'estabelecimentos.txt','socios.txt']
 
-# leitor dos dados 
+def start():
+    # iniciando o downloader:
+    utils.downloader(arquivos_urls=lista_urls, prefixo=zipped,destino=zipped)
+    # iniciando o descompactador:
+    utils.descompactando(caminho_do_arquivo=zipped, tipo_arquivo='.zip',destino=unzipped)
+
+
+if __name__ == "__main__":
+    start()
