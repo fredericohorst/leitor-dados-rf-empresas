@@ -131,3 +131,4 @@ dmypy.json
 # CSV and ZIP files
 *.csv
 *.zip
+arquivos-unzip/
