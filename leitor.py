@@ -12,6 +12,14 @@ spark_session = SparkSession.builder \
 
 sqlContext = SQLContext(spark_session)
 
+# dicionario de faixas de idade para socios
+faixa_etaria = sqlContext.read.csv(
+        'dict_faixa_etaria.txt',
+        sep=',',
+        schema=StructType([StructField('cod_faixa',StringType(),True),StructField('desc_faixa_etaria',StringType(),True)])
+        )
+faixa_etaria.registerTempTable('faixa_etaria')
+
 # importador
 def importador_spark(arquivo, separador, schema, sql_alias, previsualizacao):
         leitor = sqlContext.read.csv(
@@ -49,7 +57,15 @@ def importador_socios(arquivo, separador, previsualizacao):
                 StructField('qualificacao_do_representante_legal',StringType(),True),
                 StructField('faixa_etaria',StringType(),True)
                 ])
-        importador_spark(arquivo,separador=separador,schema=schema_socios,sql_alias='socios', previsualizacao=previsualizacao)
+        importador_spark(arquivo,separador=separador,schema=schema_socios,sql_alias='socios', previsualizacao=False)
+        query_fx = """
+                SELECT socios.* , faixa_etaria.*
+                FROM socios
+                LEFT JOIN faixa_etaria ON socios.faixa_etaria = faixa_etaria.cod_faixa
+        """
+        socios_fx = sqlContext.sql(query_fx)
+        socios_fx.registerTempTable('socios')
+        if previsualizacao == True: socios_fx.show(10)
         return 'tabela de socios carregada com sucesso'
 
 def importador_empresas(arquivo, separador, previsualizacao):
