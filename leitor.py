@@ -27,7 +27,6 @@ def importador_spark(arquivo, separador, schema, sql_alias, previsualizacao):
         if previsualizacao == True: leitor.show(10) # preview da tabela
         return leitor
 
-
 def importador_cnaes(arquivo, separador, previsualizacao):
         schema_cnaes = StructType([
                 StructField('codigo',StringType(), True),
@@ -163,7 +162,3 @@ def importador_simples(arquivo, separador, previsualizacao):
                 ])
         importador_spark(arquivo,separador=separador,schema=schema_simples,sql_alias='simples', previsualizacao=previsualizacao)
         return 'tabela do simples nacional carregada com sucesso'
-
-
-
-# importador_cnaes("arquivos-unzip/F.K03200$Z.D10510.CNAECSV",separador=";",previsualizacao=False)
