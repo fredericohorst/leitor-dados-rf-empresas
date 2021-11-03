@@ -1,16 +1,9 @@
-
-
+import utils
 from pyspark.sql import SparkSession, SQLContext
 from pyspark.sql.types import StringType, StructField, StructType
 
 # spark configs:
-spark_session = SparkSession.builder \
-        .master("local") \
-        .appName("leitor-dados-rf-empresas") \
-        .config("spark.some.config.option", "some-value") \
-        .getOrCreate()
-
-sqlContext = SQLContext(spark_session)
+spark_session, sqlContext, sc = utils.spark_configs(memory='4G')
 
 # dicionario de faixas de idade para socios
 faixa_etaria = sqlContext.read.csv(
