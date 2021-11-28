@@ -1,5 +1,4 @@
 import utils
-from pyspark.sql import SparkSession, SQLContext
 from pyspark.sql.types import StringType, StructField, StructType
 
 # spark configs:
@@ -15,6 +14,11 @@ faixa_etaria.registerTempTable('faixa_etaria')
 
 # importador
 def importador_spark(arquivo, separador, schema, sql_alias, previsualizacao):
+        """
+        Método para construir o descompactador. O método constrói um objeto
+        spark para a leitura dos arquivos e registra uma tabela temporária 
+        em memória para permitir a utilização do SQL na consulta dos dados.
+        """
         leitor = sqlContext.read.csv(
                 arquivo,
                 sep=separador,
@@ -28,6 +32,10 @@ def importador_spark(arquivo, separador, schema, sql_alias, previsualizacao):
         return leitor
 
 def importador_cnaes(arquivo, separador, previsualizacao):
+        """
+        Método para a importação dos arquivos contendo
+        as informações das tabelas do CNAE.
+        """
         schema_cnaes = StructType([
                 StructField('codigo',StringType(), True),
                 StructField('descricao',StringType(), True)
@@ -36,6 +44,10 @@ def importador_cnaes(arquivo, separador, previsualizacao):
         return 'tabela de cnaes carregada com sucesso'
 
 def importador_socios(arquivo, separador, previsualizacao):
+        """
+        Método para a importação dos arquivos contendo
+        as informações das tabelas dos Sócios.
+        """
         schema_socios = StructType([
                 StructField('cnpj_basico',StringType(),True),
                 StructField('identificador_de_socio',StringType(),True),
@@ -61,6 +73,10 @@ def importador_socios(arquivo, separador, previsualizacao):
         return 'tabela de socios carregada com sucesso'
 
 def importador_empresas(arquivo, separador, previsualizacao):
+        """
+        Método para a importação dos arquivos contendo
+        as informações das tabelas das Empresas.
+        """
         schema_empresas = StructType([
                 StructField('cnpj_basico',StringType(),True),
                 StructField('razao_social',StringType(),True),
@@ -74,6 +90,10 @@ def importador_empresas(arquivo, separador, previsualizacao):
         return 'tabela de empresas carregada com sucesso'
 
 def importador_estabelecimentos(arquivo, separador, previsualizacao):
+        """
+        Método para a importação dos arquivos contendo
+        as informações das tabelas dos Estabelecimentos.
+        """
         schema_estabelecimentos = StructType([
                 StructField('cnpj_basico',StringType(),True),
                 StructField('cnpj_ordem',StringType(),True),
@@ -110,6 +130,10 @@ def importador_estabelecimentos(arquivo, separador, previsualizacao):
         return 'tabela de estabelecimentos carregada com sucesso'
 
 def importador_motivo_situacao_cadastral(arquivo, separador, previsualizacao):
+        """
+        Método para a importação dos arquivos contendo
+        as informações da tabela do Motivo Situação Cadastral.
+        """
         schema_sit_cadastral = StructType([
                 StructField('codigo',StringType(),True),
                 StructField('descricao',StringType(),True),
@@ -118,6 +142,10 @@ def importador_motivo_situacao_cadastral(arquivo, separador, previsualizacao):
         return 'tabela de situacao cadastral carregada com sucesso'
 
 def importador_municipios(arquivo, separador, previsualizacao):
+        """
+        Método para a importação dos arquivos contendo
+        as informações da tabela dos Municípios.
+        """
         schema_municipios = StructType([
                 StructField('codigo',StringType(),True),
                 StructField('nome_municipio',StringType(),True),
@@ -126,6 +154,10 @@ def importador_municipios(arquivo, separador, previsualizacao):
         return 'tabela de municipios carregada com sucesso'
 
 def importador_natureza_juridica(arquivo, separador, previsualizacao):
+        """
+        Método para a importação dos arquivos contendo
+        as informações da tabela da Natureza Jurídica.
+        """
         schema_natureza_juridica = StructType([
                 StructField('codigo',StringType(),True),
                 StructField('descricao',StringType(),True),
@@ -134,6 +166,10 @@ def importador_natureza_juridica(arquivo, separador, previsualizacao):
         return 'tabela de natureza juridica carregada com sucesso'
 
 def importador_paises(arquivo, separador, previsualizacao):
+        """
+        Método para a importação dos arquivos contendo
+        as informações da tabela dos Países.
+        """
         schema_paises = StructType([
                 StructField('codigo',StringType(),True),
                 StructField('nome_do_pais',StringType(),True),
@@ -142,7 +178,12 @@ def importador_paises(arquivo, separador, previsualizacao):
         return 'tabela de países carregada com sucesso'
 
 def importador_qualificacao_socios(arquivo, separador, previsualizacao):
-        # qualificacao dos socios também serve para qualificar os responsáveis do cnpj
+        """
+        Método para a importação dos arquivos contendo
+        as informações da tabela de Qualificação dos Sócios.
+        A tabela de qualificação dos sócios também pode ser usada
+        para identificar a qualificação dos responsáveis pelo CNPJ.
+        """
         schema_qualificacao_socios = StructType([
                 StructField('codigo',StringType(),True),
                 StructField('descricao',StringType(),True),
@@ -151,6 +192,10 @@ def importador_qualificacao_socios(arquivo, separador, previsualizacao):
         return 'tabela de qualificacao socios carregada com sucesso'
 
 def importador_simples(arquivo, separador, previsualizacao):
+        """
+        Método para a importação dos arquivos contendo
+        as informações da tabela do Simples Nacional.
+        """
         schema_simples = StructType([
                 StructField('cnpj_basico',StringType(),True),
                 StructField('opcao_simples',StringType(),True),

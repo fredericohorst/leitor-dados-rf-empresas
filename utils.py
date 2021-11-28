@@ -21,6 +21,15 @@ def spark_configs(memory, executor_memory='4G', max_cores='2'):
     return spark_session, sqlContext, spark_context
 
 def descompactando (caminho_do_arquivo, tipo_arquivo, destino):
+    """
+    Função para descompactar todos os arquivos dentro de
+    um mesmo diretório.
+    *caminho_do_arquivo:* caminho completo do diretório que 
+    contém diversos arquivos compactados.
+    *tipo_arquivo:* extensão utilizada, como .zip.
+    *destino:* caminho completo da pasta de destino dos
+    arquivos a serem descompactados.
+    """
     files = os.listdir(caminho_do_arquivo)
     for file in files:
         if file.endswith(tipo_arquivo):
@@ -28,4 +37,6 @@ def descompactando (caminho_do_arquivo, tipo_arquivo, destino):
             with ZipFile(file_path) as zip_file:
                 zip_file.extract(member=file.strip('.zip'), path=destino)
             print('arquivo descompactado: ', file)
+        else:
+            print('tipo de arquivo ainda não suportado')
     return 'arquivos descompactados com sucesso'
