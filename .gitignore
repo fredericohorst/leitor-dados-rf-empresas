@@ -132,3 +132,4 @@ dmypy.json
 *.csv
 *.zip
 arquivos-unzip/
+*.drawio
