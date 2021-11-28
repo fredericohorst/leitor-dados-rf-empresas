@@ -11,6 +11,7 @@ Os arquivos são bastante grandes, exigindo um maior processamento e capacidade 
 3. Biblioteca `leitor` contendo métodos para a leitura e limpeza básica dos dados já descompactados da Receita Federal. 
 
 Todos os métodos de como usar as bibliotecas acima estão dentro do notebook `exemplo_perfil_empresarios_br.ipynb`. Os métodos aqui listados seguem o seguinte fluxo:
+
 ![fluxo](https://github.com/fredericohorst/leitor-dados-rf-empresas/blob/main/fluxo_leitor_dados.png)
 
 
