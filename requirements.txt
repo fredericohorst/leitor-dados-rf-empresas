@@ -1,2 +1,6 @@
 pyspark
 zipfile
+pandas
+numpy
+requests
+bs4
