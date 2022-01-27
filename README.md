@@ -4,6 +4,8 @@
 
 A receita federal disponibiliza mensalmente as bases de dados abertas para os dados cadastrais das empresas brasileiras [aqui](https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/cadastros/consultas/dados-publicos-cnpj).
 
+Você também pode consultar [este texto aqui](https://medium.com/triohq/consultando-dados-abertos-das-empresas-brasileiras-9ce7113f9f75) que explica melhor como usar o projeto.
+
 Os arquivos são bastante grandes, exigindo um maior processamento e capacidade de disco. Por esse motivo desenvolvi uma solução bastante simples composta de:
 
 1. Uma instrução bash que faz o download do arquivo. A instrução bash pode ser executada dentro do próprio notebook ou apenas no seu terminal de preferência aberto já na pasta do projeto `~/leitor-dados-rf-empresas/`.
